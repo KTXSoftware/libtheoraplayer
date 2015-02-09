@@ -37,7 +37,7 @@ void SetThreadName( DWORD dwThreadID, char* threadName)
 	}
 	__except(EXCEPTION_EXECUTE_HANDLER)
 	{
-		
+
 	}
 }
 
@@ -48,6 +48,7 @@ void SetThreadName( DWORD dwThreadID, char* threadName)
 #include "TheoraVideoClip.h"
 #include "TheoraAsync.h"
 #include "TheoraUtil.h"
+#include <stdio.h>
 
 #if defined(_DEBUG) || (!defined(_WIN32) && !defined(_WINRT))
 static int threadCounter = 1;
@@ -81,7 +82,7 @@ void TheoraWorkerThread::execute()
     {
         char name[64];
         sprintf(name, "TheoraWorkerThread %d", threadCounter++);
-        pthread_setname_np(name);
+        pthread_setname_np(pthread_self(), name);
     }
 #endif
 	while (isRunning())
