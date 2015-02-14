@@ -82,7 +82,11 @@ void TheoraWorkerThread::execute()
     {
         char name[64];
         sprintf(name, "TheoraWorkerThread %d", threadCounter++);
+#ifdef SYS_LINUX
         pthread_setname_np(pthread_self(), name);
+#else
+		pthread_setname_np(name);
+#endif
     }
 #endif
 	while (isRunning())
